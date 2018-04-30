@@ -34,8 +34,10 @@ $app->get('/' ,  function(Request $request ,  Response $response , array $args){
 	$params    = $request->getQueryParams();
 	if($params['echostr']) return validate($request);
 
-    $method = $request->getMethod();
-    print_r($method);
+    if($request->isGet())
+    {
+        print_r($request->getParsedBody());
+    }
 });
 
 
