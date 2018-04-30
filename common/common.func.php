@@ -17,3 +17,11 @@ function validate($request)
 
 	return $sha1_string == $signature ? $echostr : 0;
 }
+
+
+function wx_create_obj($msg_type)
+{
+	swith $msg_type:
+	default:
+	$handle_obj = new TextHandler();
+}

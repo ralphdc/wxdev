@@ -34,7 +34,8 @@ $app->get('/' ,  function(Request $request ,  Response $response , array $args){
 	$params    = $request->getQueryParams();
 	if($params['echostr']) return validate($request);
 
-	$response->getBody()->write("Hello World!");
+    $method = $request->getMethod();
+    print_r($method);
 });
 
 
