@@ -32,11 +32,11 @@ $container['db'] = function ($c) {
 
 $app->get('/' ,  function(Request $request ,  Response $response , array $args){
 	$params    = $request->getQueryParams();
-	if($params['echostr']) return validate($request);
+	if(isset($params['echostr']) && !empty($params['echostr']))  return validate($request);
 
     if($request->isGet())
     {
-        print_r($request->getParsedBody());
+        print_r("------------------");
     }
 });
 
