@@ -19,3 +19,44 @@ function validate($request)
 }
 
 
+function prepare_wx_data($msg_obj , $db , $logger , &$id)
+{
+	if($msg_type = $msg_obj->MsgType)
+	{
+		switch ($msg_type) {
+			case 'text':
+				# code...
+				$sql = "insert into wxhistory(tousername, fromusername, createtime, msgtype, msgid, content) values (".$msg_obj->ToUserName.",".$msg_obj->FromUserName.",".$msg_obj->createtime.",".$msg_obj->MsgType.",".$msg_obj->MsgId.",".$msg_obj->Content.")";
+				break;
+			case 'image':
+				# code...
+				break;
+			case 'voice':
+				# code...
+				break;		
+			case 'video':
+				# code...
+				break;	
+			case 'shortvideo':
+				# code...
+				break;	
+			case 'location':
+				# code...
+				break;	
+			case 'link':
+				# code...
+				break;			
+			default:
+				# code...
+				break;
+		}
+
+		$affect = $db->exec($sql);
+
+		$logger->addInfo("PDO exec sql: [ ".$sql." ]");
+		$logger->addInfo("PDO exec sql affected number : [ ".$affect." ]");
+
+		return $affect ? ($id = $db->lastInsertId(); return $affect) : false;
+	}
+	return false;
+}
