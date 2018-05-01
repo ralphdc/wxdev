@@ -26,7 +26,7 @@ function prepare_wx_data($msg_obj , $db , $logger , &$id)
 		switch ($msg_type) {
 			case 'text':
 				# code...
-				$sql = "insert into wxhistory(tousername, fromusername, createtime, msgtype, msgid, content) values (".$msg_obj->ToUserName.",".$msg_obj->FromUserName.",".$msg_obj->createtime.",".$msg_obj->MsgType.",".$msg_obj->MsgId.",".$msg_obj->Content.")";
+				$sql = "insert into wx_history(tousername, fromusername, createtime, msgtype, msgid, content) values (".$msg_obj->ToUserName.",".$msg_obj->FromUserName.",".$msg_obj->createtime.",".$msg_obj->MsgType.",".$msg_obj->MsgId.",".$msg_obj->Content.")";
 				break;
 			case 'image':
 				# code...
@@ -51,12 +51,18 @@ function prepare_wx_data($msg_obj , $db , $logger , &$id)
 				break;
 		}
 
-		$affect = $db->exec($sql);
-
+		try{
+			$affect = $db->exec($sql);
+		}catch(Exception $e)
+		{
+			$logger->addError(print_r($e->getMessage(), true));
+			return false;
+		} 
+		
 		$logger->addInfo("PDO exec sql: [ ".$sql." ]");
 		$logger->addInfo("PDO exec sql affected number : [ ".$affect." ]");
 		if($affect) $id = $db->lastInsertId();
-		
+
 		return $affect ?  $affect : false;
 	}
 	return false;
