@@ -42,9 +42,11 @@ $app->get('/' ,  function(Request $request ,  Response $response , array $args){
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
             $save = prepare_wx_data($postObj , $this->db, $this->logger, $insert_id);
             return $save ?  "SUCCESS" : "ERROR";
+        }
     }
-
     return "ok";
+
+    
 });
 
 
