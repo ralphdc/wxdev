@@ -22,13 +22,6 @@ $container['logger'] = function($c) {
     return $logger;
 };
 
-$container['post_logger'] = function($c) {
-    $logger = new \Monolog\Logger('post_logger');
-    $file_handler = new \Monolog\Handler\StreamHandler($c['settings']['post_log_file']);
-    $logger->pushHandler($file_handler);
-    return $logger;
-};
-
 $container['db'] = function ($c) {
     $db = $c['settings']['db'];
     $pdo = new PDO('mysql:host=' . $db['host'] . ';dbname=' . $db['dbname'],
