@@ -10,6 +10,8 @@ require BASE_PATH.'vendor/autoload.php';
 
 $config = require_once BASE_PATH."config.php";
 
+print_r($config);
+exit;
 $app = new \Slim\App(['settings' => $config]);
 
 $container = $app->getContainer();
