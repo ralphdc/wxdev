@@ -44,6 +44,8 @@ $app->post("/", function(Request $request, Response $response, array $args)
     if(!empty($post_data))
     {
         $postObj = simplexml_load_string($post_data, 'SimpleXMLElement', LIBXML_NOCDATA);
+        $response->getBody()->write("Hello world!");
+        return $response;
         $save = prepare_wx_data($postObj , $this->db, $this->logger, $insert_id);
         return $save ?  "SUCCESS" : "ERROR";
     }
