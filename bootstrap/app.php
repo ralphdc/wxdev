@@ -45,6 +45,7 @@ $app->post("/", function(Request $request, Response $response, array $args)
     $post_data = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : file_get_contents("php://input");  
     if(!empty($post_data))
     {
+        $this->logger->addInfo("post data : ".$post_data);
         $postObj = simplexml_load_string($post_data, 'SimpleXMLElement', LIBXML_NOCDATA);
         $save = prepare_wx_data($postObj , $this->db, $this->logger, $insert_id);
        if($save)
