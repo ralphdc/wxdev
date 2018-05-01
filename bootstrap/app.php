@@ -42,7 +42,8 @@ $app->get('/' ,  function(Request $request ,  Response $response , array $args){
 
 $app->post("/", function(Request $request, Response $response, array $args)
 {
-    $post_data = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : file_get_contents("php://input");  
+    $post_data = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : file_get_contents("php://input");
+    return_msg = "parse error!";
     if(!empty($post_data))
     {
         $this->logger->addInfo("post data : ".$post_data);
@@ -53,11 +54,10 @@ $app->post("/", function(Request $request, Response $response, array $args)
             $return_msg = "insert ok!";
        }else{
             $return_msg = "insert error!";
-       }
-
-       $response->getBody()->write($return_msg);
-       return $response;
+       }    
     }
+    $response->getBody()->write($return_msg);
+    return $response;
 });
 
 
