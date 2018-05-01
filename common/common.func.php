@@ -55,8 +55,9 @@ function prepare_wx_data($msg_obj , $db , $logger , &$id)
 
 		$logger->addInfo("PDO exec sql: [ ".$sql." ]");
 		$logger->addInfo("PDO exec sql affected number : [ ".$affect." ]");
-
-		return $affect ? ($id = $db->lastInsertId(); return $affect) : false;
+		if($affect) $id = $db->lastInsertId();
+		
+		return $affect ?  $affect : false;
 	}
 	return false;
 }
