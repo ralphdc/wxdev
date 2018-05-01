@@ -52,22 +52,7 @@ $app->post("/", function(Request $request, Response $response, array $args)
 
     print_r($request->getParsedBody());
     exit();
-    $post_data = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : file_get_contents("php://input");
-    $return_msg = "operate error!";
-    if(!empty($post_data))
-    {
-        
-        $postObj = simplexml_load_string($post_data, 'SimpleXMLElement', LIBXML_NOCDATA);
-        $save = prepare_wx_data($postObj , $this->db, $this->logger, $insert_id);
-       if($save)
-       {
-            $return_msg = "insert ok!";
-       }else{
-            $return_msg = "insert error!";
-       }    
-    }
-    $response->getBody()->write($return_msg);
-    return $response;
+    
 })
 
 
