@@ -38,7 +38,7 @@ $app->get('/' ,  function(Request $request ,  Response $response , array $args){
 });
 
 
-$app->post("/", function(Request $request, Response $response, array $args))
+$app->post("/", function(Request $request, Response $response, array $args)
 {
     $post_data = $GLOBALS["HTTP_RAW_POST_DATA"];
     if(!empty($post_data))
@@ -47,6 +47,6 @@ $app->post("/", function(Request $request, Response $response, array $args))
         $save = prepare_wx_data($postObj , $this->db, $this->logger, $insert_id);
         return $save ?  "SUCCESS" : "ERROR";
     }
-}
+});
 
 
