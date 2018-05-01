@@ -43,7 +43,7 @@ $app->get('/' ,  function(Request $request ,  Response $response , array $args){
 $app->post("/", function(Request $request, Response $response, array $args)
 {
     $post_data = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : file_get_contents("php://input");
-    return_msg = "parse error!";
+    $return_msg = "operate error!";
     if(!empty($post_data))
     {
         $this->logger->addInfo("post data : ".$post_data);
