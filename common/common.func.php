@@ -51,6 +51,7 @@ function prepare_wx_data($msg_obj , $db , $logger , &$id)
 				break;
 		}
 
+		$logger->addInfo("PDO exec sql: [ ".$sql." ]");
 		try{
 			$affect = $db->exec($sql);
 		}catch(Exception $e)
@@ -58,11 +59,8 @@ function prepare_wx_data($msg_obj , $db , $logger , &$id)
 			$logger->addError(print_r($e->getMessage(), true));
 			return false;
 		} 
-		
-		$logger->addInfo("PDO exec sql: [ ".$sql." ]");
 		$logger->addInfo("PDO exec sql affected number : [ ".$affect." ]");
 		if($affect) $id = $db->lastInsertId();
-
 		return $affect ?  $affect : false;
 	}
 	return false;
