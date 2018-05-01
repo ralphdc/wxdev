@@ -10,14 +10,14 @@ require BASE_PATH.'vendor/autoload.php';
 
 $config = require_once BASE_PATH."config.php";
 
-print_r($config);
-exit;
+
 $app = new \Slim\App(['settings' => $config]);
 
 $container = $app->getContainer();
+
 $container['logger'] = function($c) {
     $logger = new \Monolog\Logger('wx_logger');
-    $file_handler = new \Monolog\Handler\StreamHandler($c['setting']['log_file']);
+    $file_handler = new \Monolog\Handler\StreamHandler($c['settings']['log_file']);
     $logger->pushHandler($file_handler);
     return $logger;
 };
